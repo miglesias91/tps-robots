@@ -1,8 +1,9 @@
+#include "Individuo.h"
 
 #include<algorithm>
 #include <iostream>
 
-#include "Individuo.h"
+#include "Utiles.h"
 
 unsigned int Individuo::tamanio = 0;
 
@@ -41,7 +42,7 @@ void Individuo::inicializar()
 		// borro la caracteristica ya ubicada.
 		std::vector<unsigned int>::iterator it_a_ubicar = caracteristicas.begin();
 
-		this->avanzarIterador(it_a_ubicar, index_aleatorio);
+		std::advance(it_a_ubicar, index_aleatorio);
 
 		caracteristicas.erase(it_a_ubicar);
 
@@ -52,12 +53,55 @@ void Individuo::inicializar()
 
 unsigned int Individuo::evaluar()
 {
-	return 0;
+	// chequeo hay reinas que comparten diagonales (es decir, si se estan atacando).
+	// para eso comparo todas las parejas.
+	for (unsigned int i = 0; i < tamanio-1; i++)
+	{
+		for (unsigned int j = i+1; j < tamanio; j++)
+		{
+			int diferencia_columnas = j - i;
+			int diferencia_filas = this->posiciones_reinas.at(j) - this->posiciones_reinas.at(i);
+
+			// si la diferencia de filas es negativo, lo hago positivo.
+			diferencia_filas *= diferencia_filas < 0 ? -1 : 1;
+
+			if (diferencia_filas == diferencia_columnas)
+			{// si el par de reinas estan atacandose, entonces incremento el fitness.
+				this->fitness++;
+			}
+		}
+	}
+	return this->fitness;
 }
 
 unsigned int Individuo::getFitness()
 {
 	return this->fitness;
+}
+
+std::vector<unsigned int> Individuo::getCaracteristicas()
+{
+	return this->posiciones_reinas;
+}
+
+void Individuo::setCaracteristicas(std::vector<unsigned int> caracteristicas)
+{
+	this->posiciones_reinas;
+}
+
+void Individuo::cruzarCon(Individuo* individuo_a_cruzar, unsigned int caracteristicas_a_cruzar)
+{
+	std::vector<unsigned int> posiciones_a_cruzar = individuo_a_cruzar->getCaracteristicas();
+
+	for (int i = 0; i < caracteristicas_a_cruzar; i++)
+	{
+		unsigned int caracteristica_a_cruzar = posiciones_a_cruzar.at(i);
+		std::vector<unsigned int>::iterator it = std::find(this->posiciones_reinas.begin(), this->posiciones_reinas.end(), caracteristica_a_cruzar);
+
+		unsigned int index_a_swapear = std::distance(this->posiciones_reinas.begin(), it);
+
+		std::swap(this->posiciones_reinas[index_a_swapear], this->posiciones_reinas[i]);
+	}
 }
 
 std::vector<unsigned int> Individuo::caracteristicasAUbicar()
@@ -73,11 +117,11 @@ std::vector<unsigned int> Individuo::caracteristicasAUbicar()
 	return caracteristicas_a_ubicar;
 }
 
-std::vector<unsigned int>::iterator Individuo::avanzarIterador(std::vector<unsigned int>::iterator& iterador, unsigned int posiciones_a_avanzar)
+bool Individuo::compararFitness(Individuo* individuo1, Individuo* individuo2)
 {
-	for (int i = 0; i < posiciones_a_avanzar; i++)
+	if (individuo1->getFitness() < individuo2->getFitness())
 	{
-		iterador++;
+		return true;
 	}
-	return iterador;
+	return false;
 }

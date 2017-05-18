@@ -19,7 +19,7 @@ private:
 	// evalua los individuos. calcula el fitness de cada uno.
 	void evaluar();
 
-	// selecciona los 2 individuos mas aptos.
+	// selecciona los 2 individuos mas aptos. los mantiene en la poblacion (lista de individuos) y elimina a los menos aptos.
 	void seleccionar();
 
 	// reproduce los 2 invividuos mas aptos.

@@ -16,6 +16,14 @@ public:
 
 	unsigned int getFitness();
 
+	void setCaracteristicas(std::vector<unsigned int> caracteristicas);
+
+	std::vector<unsigned int> getCaracteristicas();
+
+	void cruzarCon(Individuo* individuo_a_cruzar, unsigned int caracteristicas_a_cruzar);
+
+	static bool compararFitness(Individuo* individuo1, Individuo* individuo2);
+
 	static unsigned int tamanio;
 
 private:
@@ -23,8 +31,7 @@ private:
 	// devuelve un vector con la forma: {0, 1, 2, 3, .... , tamanio-1, tamanio}, ordenaro aleatoriamente.
 	std::vector<unsigned int> caracteristicasAUbicar();
 
-	std::vector<unsigned int>::iterator avanzarIterador(std::vector<unsigned int>::iterator& iterador, unsigned int posiciones_a_avanzar);
-
+	// aptitud del individuo. Mientras mas bajo fitness, mejor.
 	unsigned int fitness;
 
 	// la posicion (columna, fila) de cada reina esta definida segun:

@@ -114,16 +114,14 @@
     <ClInclude Include="Fitness.h" />
     <ClInclude Include="Individuo.h" />
     <ClInclude Include="Poblacion.h" />
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="tp2-algortimos_geneticos.rc" />
+    <ClInclude Include="Utiles.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fitness.cpp" />
     <ClCompile Include="Individuo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Poblacion.cpp" />
+    <ClCompile Include="Utiles.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
