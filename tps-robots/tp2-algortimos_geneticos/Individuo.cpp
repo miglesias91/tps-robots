@@ -3,8 +3,6 @@
 #include<algorithm>
 #include <iostream>
 
-#include "Utiles.h"
-
 unsigned int Individuo::tamanio = 0;
 
 Individuo::Individuo() : fitness(0)

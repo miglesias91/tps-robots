@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-#include "Utiles.h"
-
 Poblacion::Poblacion(unsigned int tamanio) : tamanio(tamanio)
 {
 }
@@ -96,18 +94,25 @@ void Poblacion::cruzar()
 
 	unsigned int cantidad_caracteristicas_restantes_a_cruzar = tamanio;
 	unsigned int index_aleatorio = 0;
+	std::vector<unsigned int> indices = this->crearIndicesAleatorios();
 	for (unsigned int i = 0; i < tamanio; i++)
 	{
 		// hago una nueva copia para cruzarla.
 		Individuo* nueva_cruza = new Individuo(*copia_mas_apto);
 
 		// elijo un punto aleatorio para dividir la cantidad de caracteristicas que uso del mas apto y la cantidad que uso del segundo mas apto.
-		index_aleatorio = std::rand() % cantidad_caracteristicas_restantes_a_cruzar; // ACA VER DE Q ELIJA INDEXS ALEATORIOS PERO SIEMPRES DISTINTOS.
+		index_aleatorio = std::rand() % cantidad_caracteristicas_restantes_a_cruzar;
 
-		nueva_cruza->cruzarCon(copia_segundo_mas_apto, index_aleatorio);
+		unsigned int index = indices.at(index_aleatorio);
+
+		nueva_cruza->cruzarCon(copia_segundo_mas_apto, index);
 
 		individuos[i] = nueva_cruza;
 
+		// borro la caracteristica ya ubicada.
+		std::vector<unsigned int>::iterator it_a_borrar = indices.begin();
+		std::advance(it_a_borrar, index_aleatorio);
+		indices.erase(it_a_borrar);
 		cantidad_caracteristicas_restantes_a_cruzar--;
 	}
 
@@ -117,5 +122,18 @@ void Poblacion::cruzar()
 
 void Poblacion::mutar()
 {
+	// hacer la mutation.
+}
 
+std::vector<unsigned int> Poblacion::crearIndicesAleatorios()
+{
+	std::vector<unsigned int> indices;
+	for (int i = 0; i < tamanio; i++)
+	{
+		indices.push_back(i);
+	}
+
+	std::random_shuffle(indices.begin(), indices.end());
+
+	return indices;
 }
