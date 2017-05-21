@@ -35,6 +35,11 @@ void Poblacion::evolucionar(unsigned int generaciones)
 	}
 }
 
+std::vector<Individuo*> Poblacion::getIndividuos()
+{
+	return this->individuos;
+}
+
 void Poblacion::evaluar()
 {
 	for (std::vector<Individuo*>::iterator it = this->individuos.begin(); it != this->individuos.end(); it++)
@@ -123,6 +128,10 @@ void Poblacion::cruzar()
 void Poblacion::mutar()
 {
 	// hacer la mutation.
+	for (std::vector<Individuo*>::iterator it = this->individuos.begin(); it != this->individuos.end(); it++)
+	{
+		(*it)->mutarAleatoriamente();
+	}
 }
 
 std::vector<unsigned int> Poblacion::crearIndicesAleatorios()

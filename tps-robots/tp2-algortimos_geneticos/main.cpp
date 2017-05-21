@@ -1,4 +1,5 @@
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -13,7 +14,19 @@ void main(char** argv, int argc)
 
 	tableros_con_reinas.inicializar();
 
-	tableros_con_reinas.evolucionar(100);
+	tableros_con_reinas.evolucionar(5);
+
+	std::vector<Individuo*>  individuos_evolucionados = tableros_con_reinas.getIndividuos();
+
+	// ordeno de menor a mayor segun su fitness.
+	std::sort(individuos_evolucionados.begin(), individuos_evolucionados.end(), Individuo::compararFitness);
+
+	int idx = 0;
+	for (std::vector<Individuo*>::iterator it = individuos_evolucionados.begin(); it != individuos_evolucionados.end(); it++)
+	{
+		idx++;
+		std::cout << "Indiviuo " << idx << ": " << (*it)->getFitness() << std::endl;
+	}
 
 	std::getchar();
 }

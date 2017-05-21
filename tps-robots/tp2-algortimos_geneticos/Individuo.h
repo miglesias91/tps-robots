@@ -14,6 +14,8 @@ public:
 
 	unsigned int evaluar();
 
+	void mutarAleatoriamente();
+
 	unsigned int getFitness();
 
 	void setCaracteristicas(std::vector<unsigned int> caracteristicas);

@@ -14,6 +14,8 @@ public:
 
 	void evolucionar(unsigned int generaciones);
 
+	std::vector<Individuo*> getIndividuos();
+
 private:
 
 	// evalua los individuos. calcula el fitness de cada uno.

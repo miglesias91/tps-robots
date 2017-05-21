@@ -72,6 +72,30 @@ unsigned int Individuo::evaluar()
 	return this->fitness;
 }
 
+
+void Individuo::mutarAleatoriamente()
+{
+	unsigned int mitad_de_tamanio = tamanio / 2;
+
+	unsigned int cantidad_de_columnas_a_mutar = std::rand() % mitad_de_tamanio;
+
+	// intercambio "n" columnas al azar, siendo "n" un numero aleatorio ("cantidad_de_columnas_a_mutar").
+	for (int ciclo_mutacion = 0; ciclo_mutacion < cantidad_de_columnas_a_mutar; ciclo_mutacion++)
+	{
+		unsigned int index_aleatorio_1 = std::rand() % tamanio;
+		unsigned int index_aleatorio_2 = std::rand() % tamanio;
+
+		for (unsigned int i = 0; (index_aleatorio_1 == index_aleatorio_2) && i < 10; i++)
+		{// me aseguro que no sean la misma columna.
+			index_aleatorio_1 = std::rand() % tamanio;
+			index_aleatorio_2 = std::rand() % tamanio;
+		}
+
+		// intercambio las columnas
+		std::swap(this->posiciones_reinas[index_aleatorio_1], this->posiciones_reinas[index_aleatorio_2]);
+	}
+}
+
 unsigned int Individuo::getFitness()
 {
 	return this->fitness;
