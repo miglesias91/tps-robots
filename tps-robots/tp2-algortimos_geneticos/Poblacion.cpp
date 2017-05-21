@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-Poblacion::Poblacion(unsigned int tamanio) : tamanio(tamanio)
+Poblacion::Poblacion(unsigned int tamanio) : tamanio(tamanio), existe_individuo_con_fitness_cero(false)
 {
 }
 
@@ -21,7 +21,7 @@ void Poblacion::inicializar()
 
 void Poblacion::evolucionar(unsigned int generaciones)
 {
-	for (int i = 0; i < generaciones; i++)
+	for (int i = 0; (i < generaciones) && (false == this->existe_individuo_con_fitness_cero) ; i++)
 	{
 		this->evaluar();
 
@@ -44,7 +44,10 @@ void Poblacion::evaluar()
 {
 	for (std::vector<Individuo*>::iterator it = this->individuos.begin(); it != this->individuos.end(); it++)
 	{
-		(*it)->evaluar();
+		if ( 0 == (*it)->evaluar())
+		{
+			this->existe_individuo_con_fitness_cero = true;
+		}
 	}
 }
 

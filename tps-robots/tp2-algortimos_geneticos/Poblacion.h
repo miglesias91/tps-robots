@@ -39,5 +39,8 @@ private:
 	unsigned int tamanio;
 
 	std::vector<Individuo*> individuos;
+
+	// flag que me indica si existe un individuo con el mas alto fitness (cero).
+	bool existe_individuo_con_fitness_cero;
 };
 

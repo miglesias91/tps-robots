@@ -14,7 +14,7 @@ void main(char** argv, int argc)
 
 	tableros_con_reinas.inicializar();
 
-	tableros_con_reinas.evolucionar(5);
+	tableros_con_reinas.evolucionar(3);
 
 	std::vector<Individuo*>  individuos_evolucionados = tableros_con_reinas.getIndividuos();
 
