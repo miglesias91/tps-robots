@@ -113,11 +113,13 @@
   <ItemGroup>
     <ClInclude Include="Fitness.h" />
     <ClInclude Include="Individuo.h" />
+    <ClInclude Include="IndividuoTableroConReinas.h" />
     <ClInclude Include="Poblacion.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fitness.cpp" />
     <ClCompile Include="Individuo.cpp" />
+    <ClCompile Include="IndividuoTableroConReinas.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Poblacion.cpp" />
   </ItemGroup>

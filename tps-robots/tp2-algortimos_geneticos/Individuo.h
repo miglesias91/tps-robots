@@ -10,40 +10,35 @@ public:
 	Individuo();
 	virtual ~Individuo();
 
-	void inicializar();
+	// metodos a redefinir por un individuo especifico.
+	virtual void inicializar() = 0;
 
-	unsigned int evaluar();
+	// evalua las caracteristicas del individuo y calcula su fitness.
+	virtual unsigned int evaluar() = 0;
 
-	void mutarAleatoriamente();
+	// muta las caracteristicas del invidiuo aleatoriamente.
+	virtual void mutarAleatoriamente() = 0;
 
-	unsigned int getFitness();
+	// combina caracteristicas de los dos individuos. "caracteristicas_a_cruzar" determina la cantidad de caracteristicas que se combinaran.
+	virtual void cruzarCon(Individuo* individuo_a_cruzar, unsigned int caracteristicas_a_cruzar) = 0;
 
-	void setCaracteristicas(std::vector<unsigned int> caracteristicas);
+	// devuelve un clon del individuo.
+	virtual Individuo* clonar() = 0;
 
-	std::vector<unsigned int> getCaracteristicas();
+	virtual std::vector<unsigned int> getCaracteristicas() = 0;
 
-	void cruzarCon(Individuo* individuo_a_cruzar, unsigned int caracteristicas_a_cruzar);
+	// metodos comunes a todos los individuos.
+	virtual unsigned int getFitness();
 
+	// funcion compararcion de fitness
 	static bool compararFitness(Individuo* individuo1, Individuo* individuo2);
 
+	// tamanio de las caracteristica del individuo.
 	static unsigned int tamanio;
 
-private:
-
-	// devuelve un vector con la forma: {0, 1, 2, 3, .... , tamanio-1, tamanio}, ordenaro aleatoriamente.
-	std::vector<unsigned int> caracteristicasAUbicar();
+protected:
 
 	// aptitud del individuo. Mientras mas bajo fitness, mejor.
 	unsigned int fitness;
-
-	// la posicion (columna, fila) de cada reina esta definida segun:
-	// columa = numero de index en 'posiciones_reinas'.
-	// fila = valor para ese numero de index.
-	// ej: posiciones_reinas = {2, 3, 1, 4}
-	//		. posicion_reina_1 = (columna = 1, fila = 2)
-	//		. posicion_reina_2 = (columna = 2, fila = 3)
-	//		. posicion_reina_3 = (columna = 3, fila = 1)
-	//		. posicion_reina_4 = (columna = 4, fila = 4)
-	std::vector<unsigned int> posiciones_reinas;
 };
 

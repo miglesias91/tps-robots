@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "IndividuoTableroConReinas.h"
+
 Poblacion::Poblacion(unsigned int tamanio) : tamanio(tamanio), existe_individuo_con_fitness_cero(false)
 {
 }
@@ -14,7 +16,7 @@ void Poblacion::inicializar()
 {
 	for (int i = 0; i < this->tamanio; i++)
 	{
-		Individuo* nuevo_individuo = new Individuo(); // me devuelve el individuo ya inicializado aleatoriamente.
+		Individuo* nuevo_individuo = new IndividuoTableroConReinas(); // me devuelve el individuo ya inicializado aleatoriamente.
 		this->individuos.push_back(nuevo_individuo);
 	}
 }
@@ -92,8 +94,8 @@ void Poblacion::cruzar()
 	// podria elegir cualquiera, en este caso elijo el 1er para el mas apto, y el ultimo para el segundo mas apto.
 
 	// me hago una copia estable de los dos mas apto.
-	Individuo* copia_mas_apto = new Individuo(*this->individuos.at(0));
-	Individuo* copia_segundo_mas_apto = new Individuo(*this->individuos.at(tamanio-1));
+	Individuo* copia_mas_apto = this->individuos.at(0)->clonar();
+	Individuo* copia_segundo_mas_apto = this->individuos.at(tamanio-1)->clonar();
 
 	// en el siguiente for, voy a reemaplazar los padres, elimino la memoria que estan usando.
 	delete this->individuos[0];
@@ -111,7 +113,7 @@ void Poblacion::cruzar()
 	for (unsigned int i = 0; i < tamanio; i++)
 	{
 		// hago una nueva copia para cruzarla.
-		Individuo* nueva_cruza = new Individuo(*copia_mas_apto);
+		Individuo* nueva_cruza = copia_mas_apto->clonar();
 
 		// elijo un punto aleatorio para dividir la cantidad de caracteristicas que uso del mas apto y la cantidad que uso del segundo mas apto.
 		index_aleatorio = std::rand() % cantidad_caracteristicas_restantes_a_cruzar;
