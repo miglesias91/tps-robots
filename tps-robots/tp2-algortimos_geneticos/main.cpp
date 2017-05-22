@@ -10,11 +10,13 @@ void main(char** argv, int argc)
 {
 	Individuo::tamanio = 12; // tamanio del tablero (12x12)
 
-	Poblacion tableros_con_reinas(10); // tamanio de la poblacion inicial = 10
+	unsigned int tamanio_poblacion_inicial = 10;
+	Poblacion tableros_con_reinas(tamanio_poblacion_inicial);
 
 	tableros_con_reinas.inicializar();
 
-	tableros_con_reinas.evolucionar(3);
+	unsigned int ciclos_de_generaciones = 50;
+	tableros_con_reinas.evolucionar(ciclos_de_generaciones);
 
 	std::vector<Individuo*>  individuos_evolucionados = tableros_con_reinas.getIndividuos();
 

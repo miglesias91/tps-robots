@@ -21,9 +21,14 @@ void Poblacion::inicializar()
 
 void Poblacion::evolucionar(unsigned int generaciones)
 {
-	for (int i = 0; (i < generaciones) && (false == this->existe_individuo_con_fitness_cero) ; i++)
+	for (unsigned int i = 0; (i < generaciones) ; i++)
 	{
 		this->evaluar();
+
+		if (true == this->existe_individuo_con_fitness_cero)
+		{// si hay alguno que tiene fitness == 0, entonces hay un individuo que lleguó a la solución optima. Termino la evolución.
+			break;
+		}
 
 		this->seleccionar();
 
