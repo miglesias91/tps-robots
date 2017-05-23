@@ -4,7 +4,9 @@
 #include <vector>
 
 #include "Individuo.h"
+#include "FabricaIndividuosTableroConReinas.h"
 #include "Poblacion.h"
+
 
 void main(char** argv, int argc)
 {
@@ -13,7 +15,9 @@ void main(char** argv, int argc)
 	unsigned int tamanio_poblacion_inicial = 10;
 	Poblacion tableros_con_reinas(tamanio_poblacion_inicial);
 
-	tableros_con_reinas.inicializar();
+	IFabricaIndividuos* fabrica_reinas = new FabricaIndividuosTableroConReinas();
+	tableros_con_reinas.inicializar(fabrica_reinas);
+	delete fabrica_reinas;
 
 	unsigned int ciclos_de_generaciones = 50;
 	tableros_con_reinas.evolucionar(ciclos_de_generaciones);

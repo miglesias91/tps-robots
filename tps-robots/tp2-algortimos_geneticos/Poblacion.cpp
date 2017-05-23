@@ -12,11 +12,11 @@ Poblacion::~Poblacion()
 {
 }
 
-void Poblacion::inicializar()
+void Poblacion::inicializar(IFabricaIndividuos* fabrica_de_individuos)
 {
 	for (int i = 0; i < this->tamanio; i++)
 	{
-		Individuo* nuevo_individuo = new IndividuoTableroConReinas(); // me devuelve el individuo ya inicializado aleatoriamente.
+		Individuo* nuevo_individuo = fabrica_de_individuos->fabricarNuevo(); // me devuelve el individuo ya inicializado aleatoriamente.
 		this->individuos.push_back(nuevo_individuo);
 	}
 }

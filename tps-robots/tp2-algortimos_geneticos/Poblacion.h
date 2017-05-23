@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Individuo.h"
+#include "IFabricaIndividuos.h"
 
 class Poblacion
 {
@@ -10,7 +11,7 @@ public:
 	Poblacion(unsigned int tamanio);
 	virtual ~Poblacion();
 
-	void inicializar();
+	void inicializar(IFabricaIndividuos* fabrica_de_individuos);
 
 	void evolucionar(unsigned int generaciones);
 
